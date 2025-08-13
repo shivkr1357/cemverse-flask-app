@@ -1,25 +1,23 @@
-# Use Amazon Linux 2 base image
-FROM amazonlinux:2
+# Use Python 3.11 official image as base
+FROM python:3.11-slim
 
 # Set working directory
 WORKDIR /app
 
 # Install system dependencies for PDF processing
-RUN yum update -y && yum install -y \
+RUN apt-get update && apt-get install -y \
     poppler-utils \
-    libpng-devel \
-    freetype-devel \
-    libjpeg-devel \
+    libpng-dev \
+    libfreetype6-dev \
+    libjpeg-dev \
     curl \
-    python3 \
-    python3-pip \
-    && yum clean all
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first for better caching
 COPY requirements.txt .
 
 # Install Python dependencies
-RUN python3 -m pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
 COPY . .
@@ -35,4 +33,4 @@ ENV FLASK_ENV=production
 ENV FLASK_APP=app.py
 
 # Run the application
-CMD ["python3", "app.py"]
+CMD ["python", "app.py"]
