@@ -1,0 +1,161 @@
+{
+	"info": {
+		"_postman_id": "pdf-to-ppt-api",
+		"name": "PDF to PPT Conversion API",
+		"description": "API to convert PDF files to PowerPoint presentations and return download URLs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Convert PDF File to PPT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "pdf_file",
+							"type": "file",
+							"src": [],
+							"description": "Select your PDF file to upload"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/convert",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"convert"
+					]
+				},
+				"description": "Upload a PDF file and get a download URL for the converted PowerPoint"
+			},
+			"response": []
+		},
+		{
+			"name": "Convert PDF from URL",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pdf_url\": \"https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/convert-url",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"convert-url"
+					]
+				},
+				"description": "Convert PDF from URL and get a download URL for the converted PowerPoint"
+			},
+			"response": []
+		},
+		{
+			"name": "Download PowerPoint File",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/download/{{filename}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"download",
+						"{{filename}}"
+					]
+				},
+				"description": "Download the converted PowerPoint file using the filename from the conversion response"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5000",
+			"type": "string"
+		},
+		{
+			"key": "filename",
+			"value": "example_20250813_120000_abc12345.pptx",
+			"type": "string"
+		}
+	]
+} 	
